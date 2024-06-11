@@ -114,6 +114,8 @@ apt-get install apt-file
 apt install apt-xapian-index
 update-apt-xapian-index
 apt-file update
+apt-get install software-properties-common python3-launchpadlib
+add-apt-repository -y main contrib non-free non-free-firmware
 
 # Kate text editor
 apt-get install -y kate
@@ -203,6 +205,10 @@ apt-get purge -y wslu || true
 
 # Cleaning up
 apt-get autoremove -y
+
+# Looks like mate
+add-apt-repository -y "deb http://ppa.launchpad.net/nrbrtx/dmas/ubuntu jammy main"
+apt-get install --no-install-recommends debian-mate-ayatana-settings
 
 
 echo "Ubuntu MATE (and Debian) post-install script finished! Reboot to apply all new settings and enjoy newly installed software."
