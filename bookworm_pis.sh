@@ -1,5 +1,5 @@
 #!/bin/bash
-# Ubuntu MATE (and Debian) post-install script
+# Debian post-install script
 
 if lsb_release -cs | grep -qE -e "bookworm"; then
   ver=bookworm
@@ -206,3 +206,6 @@ apt-get autoremove -y
 echo "Ubuntu MATE (and Debian) post-install script finished! Reboot to apply all new settings and enjoy newly installed software."
 
 exit 0
+
+#A huge thank you to my teacher N0rbert
+
