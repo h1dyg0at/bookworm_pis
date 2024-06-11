@@ -110,6 +110,7 @@ else
   wget -c https://raw.githubusercontent.com/rabbitvcs/rabbitvcs/v0.18/clients/caja/RabbitVCS.py -O /usr/local/share/caja-python/extensions/RabbitVCS.py
 fi
 
+apt-get install apt-file
 apt install apt-xapian-index
 update-apt-xapian-index
 apt-file update
