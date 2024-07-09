@@ -110,11 +110,11 @@ else
   wget -c https://raw.githubusercontent.com/rabbitvcs/rabbitvcs/v0.18/clients/caja/RabbitVCS.py -O /usr/local/share/caja-python/extensions/RabbitVCS.py
 fi
 
-apt-get install apt-file
-apt install apt-xapian-index
+apt-get install -y apt-file
+apt install -y apt-xapian-index
 update-apt-xapian-index
 apt-file update
-apt-get install software-properties-common python3-launchpadlib
+apt-get install -y  software-properties-common python3-launchpadlib
 add-apt-repository -y main contrib non-free non-free-firmware
 
 # Kate text editor
