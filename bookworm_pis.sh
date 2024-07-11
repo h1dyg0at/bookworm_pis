@@ -193,6 +193,17 @@ add-apt-repository -y "deb http://ppa.launchpad.net/nrbrtx/wnck/ubuntu jammy mai
 apt-get update
 apt-get dist-upgrade -y
 
+#fixes for Bookworm (xorg-keys)
+apt-key adv --keyserver keyserver.ubuntu.com --recv E756285F30DB2B2BB35012E219BFCAF5168D33A9
+add-apt-repository -y "deb http://ppa.launchpad.net/nrbrtx/xorg-hotkeys/ubuntu jammy main"
+apt-get update
+apt-get dist-upgrade -y
+cat <<EOF | sudo tee /etc/apt/preferences.d/pin-xorg-hotkeys
+Package: *
+Pin: release o=LP-PPA-nrbrtx-xorg-hotkeys
+Pin-Priority: 1337
+EOF
+
 # Remove possibly installed WSL utilites
 apt-get purge -y wslu || true
 
@@ -205,6 +216,7 @@ apt-get install -y --no-install-recommends debian-mate-ayatana-settings
 
 
 echo "Ubuntu MATE (and Debian) post-install script finished! Reboot to apply all new settings and enjoy newly installed software."
+
 
 exit 0
 
