@@ -99,8 +99,8 @@ apt-get install -y ubuntu-restricted-addons ubuntu-restricted-extras || true
 
 # Git
 apt-get install -y git
-
 apt-get install -y rabbitvcs-cli python3-caja python3-tk git mercurial subversion
+
 if [ $is_docker == 0 ]; then
   sudo -u "$SUDO_USER" -- mkdir -p ~/.local/share/caja-python/extensions
   cd ~/.local/share/caja-python/extensions
@@ -128,9 +128,6 @@ apt-get dist-upgrade -y
 apt-get install -f -y
 apt-get dist-upgrade -y
 
-
-# ReText
-apt-get install -y retext
 
 if [ $is_docker == 0 ]; then
   mkdir -p ~/.config
@@ -176,29 +173,25 @@ if [ $is_docker == 0 ] ; then
   export DEBIAN_FRONTEND=noninteractive
 fi
 
-# fixes for Bullseye, Bookworm, Jammy and Noble
-if [[ "$ver" == "bullseye" || "$ver" == "bookworm" || "$ver" == "jammy" || "$ver" == "noble" ]]; then
-  # Readline fix for LP#1926256 bug
-  if [ $is_docker == 0 ]; then
-    echo "set enable-bracketed-paste Off" | sudo -u "$SUDO_USER" tee -a ~/.inputrc
-  else
-    echo "set enable-bracketed-paste Off" | tee -a /etc/inputrc
-  fi
-  # VTE fix for LP#1922276 bug
-  apt-key adv --keyserver keyserver.ubuntu.com --recv E756285F30DB2B2BB35012E219BFCAF5168D33A9
-  add-apt-repository -y "deb http://ppa.launchpad.net/nrbrtx/vte/ubuntu jammy main"
-  apt-get update
-  apt-get dist-upgrade -y
+# fixes for Bookworm
+# Readline fix for LP#1926256 bug
+if [ $is_docker == 0 ]; then
+  echo "set enable-bracketed-paste Off" | sudo -u "$SUDO_USER" tee -a ~/.inputrc
+else
+  echo "set enable-bracketed-paste Off" | tee -a /etc/inputrc
 fi
+# VTE fix for LP#1922276 bug
+apt-key adv --keyserver keyserver.ubuntu.com --recv E756285F30DB2B2BB35012E219BFCAF5168D33A9
+add-apt-repository -y "deb http://ppa.launchpad.net/nrbrtx/vte/ubuntu jammy main"
+apt-get update
+apt-get dist-upgrade -y
 
-# fixes for Bookworm, Jammy and Noble (see LP#1947420)
-if [[ "$ver" == "bookworm" || "$ver" == "jammy" || "$ver" == "noble" ]]; then
-  apt-key adv --keyserver keyserver.ubuntu.com --recv E756285F30DB2B2BB35012E219BFCAF5168D33A9
-  add-apt-repository -y "deb http://ppa.launchpad.net/nrbrtx/wnck/ubuntu jammy main"
-  apt-get update
-  apt-get dist-upgrade -y
-fi
 
+# fixes for Bookworm (see LP#1947420)
+apt-key adv --keyserver keyserver.ubuntu.com --recv E756285F30DB2B2BB35012E219BFCAF5168D33A9
+add-apt-repository -y "deb http://ppa.launchpad.net/nrbrtx/wnck/ubuntu jammy main"
+apt-get update
+apt-get dist-upgrade -y
 
 # Remove possibly installed WSL utilites
 apt-get purge -y wslu || true
@@ -208,7 +201,7 @@ apt-get autoremove -y
 
 # Looks like mate
 add-apt-repository -y "deb http://ppa.launchpad.net/nrbrtx/dmas/ubuntu jammy main"
-apt-get install --no-install-recommends debian-mate-ayatana-settings
+apt-get install -y --no-install-recommends debian-mate-ayatana-settings
 
 
 echo "Ubuntu MATE (and Debian) post-install script finished! Reboot to apply all new settings and enjoy newly installed software."
