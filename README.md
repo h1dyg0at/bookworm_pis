@@ -1,9 +1,8 @@
 # bookworm_pis
 
-'''
+
 ## Hello users!
 It is my first git repository and first linux script. I use some code from umpis by N0rbert and I thanks for him
-'''
 
 -----------------------------------------------
 ```
